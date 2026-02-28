@@ -22,11 +22,7 @@
       --glass-border: rgba(255, 255, 255, 0.1);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Space Grotesk', sans-serif;
@@ -36,14 +32,8 @@
       line-height: 1.6;
     }
 
-    /* Animated Background */
     .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
       background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
                   radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
                   radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
@@ -56,7 +46,6 @@
       66% { transform: translate(-20px, 20px) rotate(240deg); }
     }
 
-    /* Glassmorphism Effects */
     .glass {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
@@ -64,414 +53,231 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
-    .glow-border {
-      border: 1px solid transparent;
-      background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
-                  linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)) border-box;
-    }
-
-    /* Header */
     .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      padding: 1.2rem 0;
-      backdrop-filter: blur(20px);
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 1.2rem 0; backdrop-filter: blur(20px);
       background: rgba(10, 10, 15, 0.9);
       border-bottom: 1px solid var(--glass-border);
     }
 
     .nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
       padding: 0 2rem;
     }
 
     .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 1.8rem; font-weight: 700;
       background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: all 0.3s ease; position: relative; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)); transition: width 0.3s ease; }
+    .nav-links a:hover::after { width: 100%; }
 
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-primary);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8rem 2rem 2rem 2rem;
-      position: relative;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 2rem 2rem; position: relative;
     }
 
     .hero-content h1 {
-      font-size: clamp(3rem, 8vw, 5rem);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
+      font-size: clamp(3rem, 8vw, 5rem); font-weight: 700; margin-bottom: 1.5rem;
       background: linear-gradient(45deg, var(--text-primary), var(--accent-purple), var(--accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       animation: glow 3s ease-in-out infinite alternate;
     }
 
-    @keyframes glow {
-      0% { filter: brightness(1); }
-      100% { filter: brightness(1.2); }
-    }
+    @keyframes glow { 0% { filter: brightness(1); } 100% { filter: brightness(1.2); } }
 
-    .hero-content p {
-      font-size: 1.4rem;
-      color: var(--text-secondary);
-      margin-bottom: 3rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .hero-content p { font-size: 1.4rem; color: var(--text-secondary); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; }
 
     .cta-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
+      display: inline-flex; align-items: center; gap: 0.8rem;
       padding: 1.2rem 2.5rem;
       background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
-      color: white;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
+      color: white; text-decoration: none; border-radius: 50px; font-weight: 600;
+      font-size: 1.1rem; transition: all 0.3s ease;
       box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4); }
+    .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+    .cta-button:hover::before { left: 100%; }
 
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
-    }
-
-    .cta-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .cta-button:hover::before {
-      left: 100%;
-    }
-
-    /* Services Section */
-    .services {
-      padding: 8rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .services { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
 
     .section-title {
-      text-align: center;
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 4rem;
+      text-align: center; font-size: 3rem; font-weight: 700; margin-bottom: 4rem;
       background: linear-gradient(45deg, var(--text-primary), var(--accent-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
 
     .service-card {
-      padding: 2.5rem;
-      border-radius: 20px;
-      transition: all 0.3s ease;
+      padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--glass-bg); backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border); border-radius: 20px; z-index: -1;
+    }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2); }
+    .service-card:hover::before { border-color: var(--accent-purple); box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
+    .service-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); }
+    .service-card p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; }
+
+    /* ── AUDIT SECTION ── */
+    .audit-section {
+      padding: 8rem 2rem;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(180deg, transparent 0%, rgba(139,92,246,0.04) 50%, transparent 100%);
     }
-
-    .service-card::before {
-      content: '';
+    .audit-section::before {
+      content: 'AUDIT';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      font-size: clamp(100px, 18vw, 220px);
+      font-weight: 700;
+      color: rgba(139,92,246,0.04);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -5px;
+    }
+    .audit-inner { max-width: 1200px; margin: 0 auto; text-align: center; position: relative; }
+    .audit-badge {
+      display: inline-block; border: 1px solid var(--accent-purple);
+      color: var(--accent-purple); font-size: 11px; letter-spacing: 3px;
+      text-transform: uppercase; padding: 6px 20px; border-radius: 100px; margin-bottom: 24px;
+    }
+    .audit-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 24px;
+      background: linear-gradient(45deg, #fff, var(--accent-purple), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .audit-sub { font-size: 1.2rem; color: var(--text-secondary); max-width: 560px; margin: 0 auto 56px; line-height: 1.7; }
+    .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 48px; text-align: left; }
+
+    .audit-card {
+      padding: 36px 28px; border-radius: 20px;
+      background: var(--glass-bg); backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      z-index: -1;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
-    }
-
-    .service-card:hover::before {
+    .audit-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(139,92,246,0.15); }
+    .audit-card.featured {
+      background: linear-gradient(160deg, rgba(139,92,246,0.15) 0%, rgba(6,182,212,0.1) 100%);
       border-color: var(--accent-purple);
-      box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
-    }
-
-    .service-card h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-    }
-
-    .service-card p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    /* Contact Section */
-    .contact {
-      padding: 8rem 2rem;
-      background: var(--bg-secondary);
+      box-shadow: 0 0 40px rgba(139,92,246,0.2);
       position: relative;
     }
-
-    .contact-container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-form {
-      display: grid;
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .form-input, .form-select {
-      padding: 1.2rem 1.5rem;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: inherit;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .form-input:focus, .form-select:focus {
-      outline: none;
-      border-color: var(--accent-purple);
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-    }
-
-    .form-input::placeholder {
-      color: var(--text-secondary);
-    }
-
-    .form-select option {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-    }
-
-    .submit-btn {
-      padding: 1.2rem 2rem;
+    .audit-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
       background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
+      color: white; font-size: 10px; font-weight: 600; letter-spacing: 2px;
+      padding: 5px 20px; border-radius: 0 0 8px 8px; white-space: nowrap;
     }
-
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+    .audit-card.luxury {
+      background: linear-gradient(160deg, rgba(245,158,11,0.08) 0%, rgba(236,72,153,0.08) 100%);
+      border-color: rgba(245,158,11,0.35);
     }
-
-    /* Footer */
-    .footer {
-      background: var(--bg-primary);
-      padding: 3rem 2rem;
-      text-align: center;
-      border-top: 1px solid var(--glass-border);
+    .audit-plan-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; margin-top: 8px; }
+    .audit-plan-label.cyan { color: var(--accent-cyan); }
+    .audit-plan-label.purple { color: var(--accent-purple); }
+    .audit-plan-label.orange { color: var(--accent-orange); }
+    .audit-price {
+      font-size: 44px; font-weight: 700; line-height: 1; margin-bottom: 20px;
     }
-
-    .footer p {
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
+    .audit-price sup { font-size: 20px; font-weight: 400; vertical-align: super; }
+    .audit-price.gradient-purple { background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .audit-price.gradient-luxury { background: linear-gradient(135deg, #fff, var(--accent-orange), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .audit-features { list-style: none; margin-bottom: 28px; }
+    .audit-features li { color: var(--text-secondary); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+    .audit-features li:last-child { border-bottom: none; }
+    .audit-btn {
+      display: block; text-align: center; padding: 14px; border-radius: 10px;
+      font-weight: 600; font-size: 14px; text-decoration: none; transition: all 0.2s;
+      font-family: 'Space Grotesk', sans-serif;
     }
+    .audit-btn.cyan { border: 1px solid var(--accent-cyan); color: var(--accent-cyan); }
+    .audit-btn.cyan:hover { background: rgba(6,182,212,0.1); }
+    .audit-btn.purple { background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)); color: white; box-shadow: 0 8px 25px rgba(139,92,246,0.3); }
+    .audit-btn.purple:hover { box-shadow: 0 12px 35px rgba(139,92,246,0.5); transform: translateY(-1px); }
+    .audit-btn.luxury { background: linear-gradient(45deg, var(--accent-orange), var(--accent-pink)); color: white; box-shadow: 0 8px 25px rgba(245,158,11,0.25); }
+    .audit-btn.luxury:hover { box-shadow: 0 12px 35px rgba(245,158,11,0.4); transform: translateY(-1px); }
 
-    .footer a {
-      color: var(--accent-cyan);
-      text-decoration: none;
+    .contact { padding: 8rem 2rem; background: var(--bg-secondary); position: relative; }
+    .contact-container { max-width: 600px; margin: 0 auto; }
+    .contact-form { display: grid; gap: 1.5rem; margin-top: 3rem; }
+    .form-input, .form-select {
+      padding: 1.2rem 1.5rem; background: var(--glass-bg); border: 1px solid var(--glass-border);
+      border-radius: 12px; color: var(--text-primary); font-size: 1rem; font-family: inherit;
+      backdrop-filter: blur(10px); transition: all 0.3s ease;
     }
-
-    .footer a:hover {
-      color: var(--accent-purple);
+    .form-input:focus, .form-select:focus { outline: none; border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+    .form-input::placeholder { color: var(--text-secondary); }
+    .form-select option { background: var(--bg-secondary); color: var(--text-primary); }
+    .submit-btn {
+      padding: 1.2rem 2rem; background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s ease; font-family: inherit;
+      display: flex; align-items: center; justify-content: center; gap: 0.8rem;
     }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4); }
 
-    /* Floating Particles */
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: var(--accent-purple);
-      border-radius: 50%;
-      opacity: 0.6;
-      animation: float-particle 15s linear infinite;
-    }
+    .footer { background: var(--bg-primary); padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); }
+    .footer p { color: var(--text-secondary); margin-bottom: 1rem; }
+    .footer a { color: var(--accent-cyan); text-decoration: none; }
+    .footer a:hover { color: var(--accent-purple); }
 
-    @keyframes float-particle {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-      }
-    }
+    .particle { position: absolute; width: 4px; height: 4px; background: var(--accent-purple); border-radius: 50%; opacity: 0.6; animation: float-particle 15s linear infinite; }
+    @keyframes float-particle { 0% { transform: translateY(100vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
 
-    /* Responsive Design */
+    .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+    .menu-toggle span { width: 25px; height: 3px; background-color: white; border-radius: 2px; }
+
     @media (max-width: 768px) {
-      .nav {
-        padding: 0 1rem;
-      }
-      
-      .nav-links {
-        gap: 1rem;
-      }
-      
-      .hero {
-        padding: 10rem 1rem 2rem 1rem;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .service-card {
-        padding: 2rem;
-      }
+      .nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 10rem 1rem 2rem 1rem; }
+      .hero-content h1 { font-size: 2.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 2rem; }
+      .menu-toggle { display: flex; }
+      .nav-links { display: none; flex-direction: column; width: 100%; margin-top: 1rem; }
+      .nav-links.show { display: flex; }
+      .audit-grid { grid-template-columns: 1fr; }
     }
-  
-/* Hamburger Menu */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  border-radius: 2px;
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-}
-
-</style>
+  </style>
 </head>
 <body>
   <div class="bg-animation"></div>
-  
-  <!-- Floating Particles -->
-  <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-  <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-  <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-  <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
-  <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
-  <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
-  <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
-  <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
-  <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+  <div class="particle" style="left:10%;animation-delay:0s;"></div>
+  <div class="particle" style="left:20%;animation-delay:2s;"></div>
+  <div class="particle" style="left:30%;animation-delay:4s;"></div>
+  <div class="particle" style="left:40%;animation-delay:6s;"></div>
+  <div class="particle" style="left:50%;animation-delay:8s;"></div>
+  <div class="particle" style="left:60%;animation-delay:10s;"></div>
+  <div class="particle" style="left:70%;animation-delay:12s;"></div>
+  <div class="particle" style="left:80%;animation-delay:14s;"></div>
+  <div class="particle" style="left:90%;animation-delay:16s;"></div>
 
   <header class="header">
     <nav class="nav">
       <div class="logo">GrowthMax Agency</div>
-      
-<div class="menu-toggle" onclick="toggleMenu()">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-
-<div class="nav-links">
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links">
         <a href="#services">Services</a>
+        <a href="#audit">Audit</a>
         <a href="#results">Results</a>
         <a href="#contact">Contact</a>
       </div>
@@ -482,55 +288,92 @@
     <div class="hero-content">
       <h1>Maximize Your Digital Growth</h1>
       <p>Proven strategies that deliver 3-5X ROI through cutting-edge performance marketing</p>
-      <p style="margin-top: -1.5rem; font-size: 1.2rem; color: #ec4899; font-weight: 500;">
-  We just don’t run ads and make websites – we make <span style="text-decoration: underline;">brands</span>.
-
-</p>
-
+      <p style="margin-top:-1.5rem;font-size:1.2rem;color:#ec4899;font-weight:500;">
+        We just don't run ads and make websites – we make <span style="text-decoration:underline;">brands</span>.
+      </p>
       <a href="https://wa.me/qr/ISUGRJ3U4Q5CN1" class="cta-button" target="_blank">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.085"/>
-        </svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.085"/></svg>
         Start Growing Now
       </a>
-    
-      <div class="service-card glass">
+      <div class="service-card glass" style="margin-top:2rem;">
         <h3>Social Media Marketing</h3>
         <p>Grow your brand visibility and engagement across Instagram, Facebook, and LinkedIn with strategic content, scheduling, and performance analytics.</p>
       </div>
-      <div class="service-card glass">
+      <div class="service-card glass" style="margin-top:1rem;">
         <h3>Content Marketing</h3>
         <p>Drive organic growth and customer trust through value-driven blog posts, landing page content, ad copywriting, and storytelling that converts.</p>
       </div>
-
     </div>
   </section>
 
   <section id="services" class="services">
     <h2 class="section-title">Our Growth Services</h2>
     <div class="services-grid">
-      <div class="service-card glass">
-        <h3>ROI-First Advertising</h3>
-        <p>Meta/Google/LinkedIn campaigns optimized for maximum conversions using advanced targeting and data-driven strategies.</p>
-      </div>
-      <div class="service-card glass">
-        <h3>Lead Generation Engine</h3>
-        <p>Automated systems delivering 50-200+ qualified leads/month through multi-channel acquisition funnels.</p>
-      </div>
-      <div class="service-card glass">
-        <h3>Conversion Rate Optimization</h3>
-        <p>Turn visitors into customers with scientific A/B testing and behavioral analysis frameworks.</p>
-      </div>
-    
-      <div class="service-card glass">
-        <h3>Social Media Marketing</h3>
-        <p>Grow your brand visibility and engagement across Instagram, Facebook, and LinkedIn with strategic content, scheduling, and performance analytics.</p>
-      </div>
-      <div class="service-card glass">
-        <h3>Content Marketing</h3>
-        <p>Drive organic growth and customer trust through value-driven blog posts, landing page content, ad copywriting, and storytelling that converts.</p>
+      <div class="service-card glass"><h3>ROI-First Advertising</h3><p>Meta/Google/LinkedIn campaigns optimized for maximum conversions using advanced targeting and data-driven strategies.</p></div>
+      <div class="service-card glass"><h3>Lead Generation Engine</h3><p>Automated systems delivering 50-200+ qualified leads/month through multi-channel acquisition funnels.</p></div>
+      <div class="service-card glass"><h3>Conversion Rate Optimization</h3><p>Turn visitors into customers with scientific A/B testing and behavioral analysis frameworks.</p></div>
+      <div class="service-card glass"><h3>Social Media Marketing</h3><p>Grow your brand visibility and engagement across Instagram, Facebook, and LinkedIn with strategic content, scheduling, and performance analytics.</p></div>
+      <div class="service-card glass"><h3>Content Marketing</h3><p>Drive organic growth and customer trust through value-driven blog posts, landing page content, ad copywriting, and storytelling that converts.</p></div>
+    </div>
+  </section>
+
+  <!-- ── SOCIAL MEDIA AUDIT SECTION ── -->
+  <section id="audit" class="audit-section">
+    <div class="audit-inner">
+      <div class="audit-badge">✦ New Service ✦</div>
+      <h2 class="audit-title">Know exactly why<br>you're not going viral.</h2>
+      <p class="audit-sub">A ruthlessly honest, data-driven audit of your social media presence — delivered within 24 hours.</p>
+
+      <div class="audit-grid">
+
+        <!-- BASIC -->
+        <div class="audit-card">
+          <div class="audit-plan-label cyan">Basic</div>
+          <div class="audit-price"><sup>₹</sup>999</div>
+          <ul class="audit-features">
+            <li>✦ &nbsp;Profile audit & recommendations</li>
+            <li>✦ &nbsp;Content performance review</li>
+            <li>✦ &nbsp;Top 5 growth tips</li>
+            <li>✦ &nbsp;Hashtag strategy</li>
+            <li>✦ &nbsp;Premium PDF report</li>
+          </ul>
+          <a href="/audit.html" class="audit-btn cyan">Get Basic Audit →</a>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="audit-card featured">
+          <div class="audit-plan-label purple">Premium</div>
+          <div class="audit-price gradient-purple"><sup>₹</sup>2,500</div>
+          <ul class="audit-features">
+            <li>✦ &nbsp;Everything in Basic</li>
+            <li>✦ &nbsp;3 competitor deep-dive</li>
+            <li>✦ &nbsp;Engagement strategy</li>
+            <li>✦ &nbsp;30-day action plan</li>
+            <li>✦ &nbsp;1 follow-up Q&A on WhatsApp</li>
+          </ul>
+          <a href="/audit.html" class="audit-btn purple">Get Premium Audit →</a>
+        </div>
+
+        <!-- LUXURIOUS -->
+        <div class="audit-card luxury">
+          <div class="audit-plan-label orange">✦ Luxurious</div>
+          <div class="audit-price gradient-luxury"><sup>₹</sup>66,666</div>
+          <ul class="audit-features">
+            <li>✦ &nbsp;Everything in Premium</li>
+            <li>✦ &nbsp;Custom 3-month strategy</li>
+            <li>✦ &nbsp;Influencer outreach list</li>
+            <li>✦ &nbsp;Priority 6-hour delivery</li>
+            <li>✦ &nbsp;30-day dedicated support</li>
+          </ul>
+          <a href="/audit.html" class="audit-btn luxury">View Luxurious Package →</a>
+        </div>
+
       </div>
 
+      <a href="/audit.html" class="cta-button" style="font-size:1rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        See Full Audit Details
+      </a>
     </div>
   </section>
 
@@ -541,33 +384,23 @@
         <input type="text" class="form-input" placeholder="Your Name" required>
         <input type="email" class="form-input" placeholder="Business Email" required>
         <input type="tel" class="form-input" placeholder="Mobile Number" id="phone" required>
-<select class="form-select" required>
+        <select class="form-select" required>
           <option value="">Select Service Interest</option>
           <option>Paid Advertising</option>
           <option>Lead Generation</option>
           <option>Full Marketing Strategy</option>
           <option>Social Media Marketing</option>
           <option>Content Marketing</option>
+          <option>Social Media Audit</option>
           <option>WebSite Development</option>
-
         </select>
         <button type="submit" class="submit-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.085"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.085"/></svg>
           Get Free Proposal
         </button>
       </form>
-    
-      <div class="service-card glass">
-        <h3>Social Media Marketing</h3>
-        <p>Grow your brand visibility and engagement across Instagram, Facebook, and LinkedIn with strategic content, scheduling, and performance analytics.</p>
-      </div>
-      <div class="service-card glass">
-        <h3>Content Marketing</h3>
-        <p>Drive organic growth and customer trust through value-driven blog posts, landing page content, ad copywriting, and storytelling that converts.</p>
-      </div>
-
+      <div class="service-card glass" style="margin-top:2rem;"><h3>Social Media Marketing</h3><p>Grow your brand visibility and engagement across Instagram, Facebook, and LinkedIn with strategic content, scheduling, and performance analytics.</p></div>
+      <div class="service-card glass" style="margin-top:1rem;"><h3>Content Marketing</h3><p>Drive organic growth and customer trust through value-driven blog posts, landing page content, ad copywriting, and storytelling that converts.</p></div>
     </div>
   </section>
 
@@ -576,64 +409,39 @@
     <p>Delivering 10X Growth Since 2025</p>
   </footer>
 
-  
-<script>
-  function handleFormSubmit(e) {
-    e.preventDefault();
-
-    const name = document.querySelector('input[placeholder="Your Name"]').value;
-    const email = document.querySelector('input[placeholder="Business Email"]').value;
-    const phone = document.querySelector('input[placeholder="Mobile Number"]').value;
-    const service = document.querySelector('select').value;
-
-    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdqRL0PXvkaZXH5Y2a9i-wgH5KvJNsTzGaxp-MskvoHkZ5AFA/formResponse';
-    const formData = new FormData();
-    formData.append('entry.1638650022', name);   // Name
-    formData.append('entry.476385810', email);   // Email
-    formData.append('entry.185244439', phone);   // Phone
-    formData.append('entry.2014012075', service); // Service
-
-    fetch(formUrl, {
-      method: "POST",
-      mode: "no-cors",
-      body: formData
-    }).then(() => {
-      const message = `New GrowthMax Inquiry:%0A%0A*Name*: ${name}%0A*Email*: ${email}%0A*Phone*: ${phone}%0A*Service*: ${service}`;
-      window.location.href = `https://wa.me/918302354951?text=${message}`;
-    });
-  }
-
-  // Add smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  <script>
+    function handleFormSubmit(e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-
-  // Add parallax effect to hero section
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      const name = document.querySelector('input[placeholder="Your Name"]').value;
+      const email = document.querySelector('input[placeholder="Business Email"]').value;
+      const phone = document.querySelector('input[placeholder="Mobile Number"]').value;
+      const service = document.querySelector('select').value;
+      const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdqRL0PXvkaZXH5Y2a9i-wgH5KvJNsTzGaxp-MskvoHkZ5AFA/formResponse';
+      const formData = new FormData();
+      formData.append('entry.1638650022', name);
+      formData.append('entry.476385810', email);
+      formData.append('entry.185244439', phone);
+      formData.append('entry.2014012075', service);
+      fetch(formUrl, { method: "POST", mode: "no-cors", body: formData }).then(() => {
+        const message = `New GrowthMax Inquiry:%0A%0A*Name*: ${name}%0A*Email*: ${email}%0A*Phone*: ${phone}%0A*Service*: ${service}`;
+        window.location.href = `https://wa.me/918302354951?text=${message}`;
+      });
     }
-  });
-</script>
-
-
-<script>
-  function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('show');
-  }
-</script>
-
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero');
+      if (hero) hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
