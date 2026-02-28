@@ -441,9 +441,9 @@
             <li>Premium PDF report</li>
             <li>Delivery within 24 hours</li>
           </ul>
-          <a href="upi://pay?pa=8302354951@ybl&pn=GrowthMaxAgency&am=999&cu=INR&tn=Basic+Audit" class="pay-btn pay-btn-outline">
+          <button onclick="showPayment(999,'Basic Audit')" class="pay-btn pay-btn-outline">
             Pay ₹999 via UPI
-          </a>
+          </button>
         </div>
 
         <!-- PREMIUM -->
@@ -461,9 +461,9 @@
             <li>30-day action plan</li>
             <li>1 follow-up Q&A via WhatsApp</li>
           </ul>
-          <a href="upi://pay?pa=8302354951@ybl&pn=GrowthMaxAgency&am=2500&cu=INR&tn=Premium+Audit" class="pay-btn pay-btn-primary">
+          <button onclick="showPayment(2500,'Premium Audit')" class="pay-btn pay-btn-primary">
             Pay ₹2,500 via UPI
-          </a>
+          </button>
         </div>
 
         <!-- LUXURIOUS -->
@@ -516,5 +516,66 @@
       });
     });
   </script>
+
+<!-- PAYMENT MODAL -->
+<div id="payModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+  <div style="background:#111;border:1px solid rgba(201,168,76,0.4);padding:48px 40px;max-width:420px;width:90%;text-align:center;position:relative;border-radius:4px;">
+    <button onclick="closePayment()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#999;font-size:24px;cursor:pointer;">×</button>
+    <div style="font-size:11px;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:8px;">Pay via UPI</div>
+    <div id="modalTitle" style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:4px;"></div>
+    <div id="modalAmt" style="font-size:13px;color:#999;margin-bottom:28px;"></div>
+
+    <!-- QR CODE -->
+    <div style="background:white;padding:12px;display:inline-block;border-radius:4px;margin-bottom:24px;">
+      <img id="qrImg" src="" alt="UPI QR Code" style="width:180px;height:180px;display:block;">
+    </div>
+
+    <div style="font-size:13px;color:#999;margin-bottom:12px;">or copy UPI ID</div>
+    <div style="display:flex;align-items:center;gap:8px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);padding:12px 16px;border-radius:4px;margin-bottom:24px;">
+      <span style="flex:1;font-size:15px;color:#f9f6f0;text-align:left;">8302354951@ybl</span>
+      <button onclick="copyUPI()" id="copyBtn" style="background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);color:#c9a84c;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">Copy</button>
+    </div>
+
+    <div style="font-size:12px;color:#666;margin-bottom:20px;">After payment, send screenshot to WhatsApp to confirm your order.</div>
+    <a id="waConfirm" href="" target="_blank" style="display:block;background:#25D366;color:white;padding:14px;border-radius:4px;text-decoration:none;font-size:14px;font-weight:500;">
+      ✓ I've paid — Confirm on WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+function showPayment(amount, plan) {
+  const upiId = '8302354951@ybl';
+  const name = 'GrowthMaxAgency';
+  const upiLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR&tn=${encodeURIComponent(plan)}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiLink)}`;
+
+  document.getElementById('modalTitle').textContent = plan;
+  document.getElementById('modalAmt').textContent = '₹' + amount.toLocaleString('en-IN');
+  document.getElementById('qrImg').src = qrUrl;
+  document.getElementById('waConfirm').href = `https://wa.me/918302354951?text=Hi!%20I%20just%20paid%20%E2%82%B9${amount}%20for%20the%20${encodeURIComponent(plan)}%20from%20GrowthMax%20Agency.%20Please%20confirm%20my%20order.`;
+
+  const modal = document.getElementById('payModal');
+  modal.style.display = 'flex';
+}
+
+function closePayment() {
+  document.getElementById('payModal').style.display = 'none';
+}
+
+function copyUPI() {
+  navigator.clipboard.writeText('8302354951@ybl').then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.style.background = 'rgba(201,168,76,0.3)';
+    setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = 'rgba(201,168,76,0.15)'; }, 2000);
+  });
+}
+
+// Close on backdrop click
+document.getElementById('payModal').addEventListener('click', function(e) {
+  if (e.target === this) closePayment();
+});
+</script>
 </body>
 </html>
