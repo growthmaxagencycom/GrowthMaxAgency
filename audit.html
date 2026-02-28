@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Audit — GrowthMax Agency</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0ab;
+      --accent-purple: #8b5cf6;
+      --accent-cyan: #06b6d4;
+      --accent-pink: #ec4899;
+      --accent-orange: #f59e0b;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ANIMATED BACKGROUND — matches main site */
+    .bg-animation {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(120deg); }
+      66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+
+    /* PARTICLES */
+    .particle {
+      position: fixed; width: 4px; height: 4px;
+      background: var(--accent-purple); border-radius: 50%; opacity: 0.6;
+      animation: float-particle 15s linear infinite;
+    }
+    @keyframes float-particle {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* HEADER */
+    .header {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 1.2rem 0; backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.9);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; padding: 0 2rem;
+    }
+    .logo {
+      font-size: 1.8rem; font-weight: 700;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan)); transition: width 0.3s; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta-link {
+      padding: 0.5rem 1.2rem;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      border-radius: 50px; color: white !important; font-weight: 600; font-size: 0.9rem;
+    }
+    .nav-cta-link::after { display: none !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem; position: relative;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      border-radius: 50px; font-size: 0.85rem; color: var(--accent-cyan);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 700; margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--text-primary), var(--accent-purple), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: glow 3s ease-in-out infinite alternate, fadeUp 0.9s ease both 0.1s;
+      line-height: 1.1;
+    }
+    @keyframes glow { 0% { filter: brightness(1); } 100% { filter: brightness(1.2); } }
+    .hero-sub {
+      font-size: 1.3rem; color: var(--text-secondary); max-width: 600px;
+      margin: 0 auto 1rem; animation: fadeUp 1s ease both 0.2s;
+    }
+    .hero-sub-pink {
+      font-size: 1.1rem; color: var(--accent-pink); font-weight: 500;
+      margin-bottom: 3rem; animation: fadeUp 1s ease both 0.3s;
+    }
+    .hero-buttons {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 1s ease both 0.4s;
+    }
+    .cta-button {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      color: white; text-decoration: none; border-radius: 50px;
+      font-weight: 600; font-size: 1.1rem; transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); position: relative; overflow: hidden;
+    }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(139, 92, 246, 0.5); }
+    .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+    .cta-button:hover::before { left: 100%; }
+    .cta-outline {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      padding: 1.2rem 2.5rem; border: 1px solid rgba(139, 92, 246, 0.5);
+      color: var(--text-primary); text-decoration: none; border-radius: 50px;
+      font-weight: 500; font-size: 1rem; transition: all 0.3s;
+    }
+    .cta-outline:hover { border-color: var(--accent-purple); background: rgba(139, 92, 246, 0.1); transform: translateY(-2px); }
+
+    /* WHAT'S INCLUDED */
+    .section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-title {
+      text-align: center; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--text-primary), var(--accent-purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-sub { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 4rem; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .feature-card {
+      padding: 2.5rem; border-radius: 20px;
+      background: var(--glass-bg); backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-8px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-num {
+      font-size: 3rem; font-weight: 700; line-height: 1; margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      opacity: 0.4;
+    }
+    .feature-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.8rem; }
+    .feature-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+
+    /* PROCESS */
+    .process-section { padding: 8rem 2rem; background: var(--bg-secondary); }
+    .process-inner { max-width: 1200px; margin: 0 auto; }
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 4rem; position: relative; }
+    .process-grid::before { content: ''; position: absolute; top: 40px; left: 15%; right: 15%; height: 1px; background: linear-gradient(to right, transparent, var(--accent-purple), var(--accent-cyan), transparent); opacity: 0.4; }
+    .process-step { text-align: center; padding: 0 1rem; }
+    .step-circle {
+      width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; font-weight: 700; position: relative; z-index: 1;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    }
+    .step-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .step-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+    /* PRICING */
+    .pricing-section { padding: 8rem 2rem; }
+    .pricing-inner { max-width: 1200px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
+
+    .pricing-card {
+      padding: 3rem 2.5rem; border-radius: 20px;
+      background: var(--glass-bg); backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .pricing-card:hover { transform: translateY(-8px); }
+
+    .pricing-card.featured {
+      border-color: var(--accent-purple);
+      background: rgba(139, 92, 246, 0.08);
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.2);
+    }
+    .pricing-card.luxury {
+      border-color: var(--accent-orange);
+      background: rgba(245, 158, 11, 0.05);
+    }
+    .pricing-card.luxury:hover { box-shadow: 0 20px 40px rgba(245, 158, 11, 0.2); }
+
+    .popular-tag {
+      position: absolute; top: 0; right: 2rem;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      color: white; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
+      padding: 0.3rem 1rem; border-radius: 0 0 8px 8px; text-transform: uppercase;
+    }
+    .luxury-tag {
+      position: absolute; top: 0; right: 2rem;
+      background: linear-gradient(45deg, var(--accent-orange), var(--accent-pink));
+      color: white; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
+      padding: 0.3rem 1rem; border-radius: 0 0 8px 8px; text-transform: uppercase;
+    }
+
+    .plan-label { font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 1rem; }
+    .plan-price { font-size: 3.5rem; font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
+    .plan-price sup { font-size: 1.5rem; font-weight: 500; vertical-align: super; }
+    .luxury .plan-price, .pricing-card.luxury .plan-price {
+      background: linear-gradient(45deg, var(--accent-orange), var(--accent-pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .plan-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.5; }
+    .plan-features { list-style: none; margin-bottom: 2.5rem; }
+    .plan-features li {
+      color: var(--text-secondary); font-size: 0.95rem; padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .plan-features li::before { content: '✦'; font-size: 0.7rem; flex-shrink: 0; }
+    .featured .plan-features li::before { color: var(--accent-purple); }
+    .pricing-card:not(.featured):not(.luxury) .plan-features li::before { color: var(--accent-cyan); }
+    .pricing-card.luxury .plan-features li::before { color: var(--accent-orange); }
+
+    .pay-btn {
+      display: flex; width: 100%; align-items: center; justify-content: center; gap: 0.7rem;
+      padding: 1.1rem; border-radius: 12px; font-size: 0.95rem; font-weight: 600;
+      letter-spacing: 0.5px; cursor: pointer; transition: all 0.3s; text-decoration: none;
+      font-family: inherit; border: none;
+    }
+    .pay-btn-primary {
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+      color: white; box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+    }
+    .pay-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(139, 92, 246, 0.5); }
+    .pay-btn-outline {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid var(--glass-border) !important;
+    }
+    .pay-btn-outline:hover { border-color: var(--accent-cyan) !important; background: rgba(6, 182, 212, 0.08); }
+    .pay-btn-luxury {
+      background: linear-gradient(45deg, var(--accent-orange), var(--accent-pink));
+      color: white; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+    }
+    .pay-btn-luxury:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5); }
+
+    /* CTA BOTTOM */
+    .cta-section {
+      padding: 8rem 2rem; text-align: center; background: var(--bg-secondary);
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+    }
+    .cta-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 1.5rem; position: relative; }
+    .cta-section p { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 3rem; position: relative; }
+
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      padding: 1.2rem 2.5rem; background: #25D366; color: white;
+      text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem;
+      transition: all 0.3s; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+      position: relative; overflow: hidden;
+    }
+    .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5); }
+    .whatsapp-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+    .whatsapp-btn:hover::before { left: 100%; }
+
+    /* FOOTER */
+    .footer { background: var(--bg-primary); padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); }
+    .footer p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+    .footer a { color: var(--accent-cyan); text-decoration: none; }
+    .footer a:hover { color: var(--accent-purple); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* HAMBURGER */
+    .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+    .menu-toggle span { width: 25px; height: 3px; background: white; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav-links { display: none; flex-direction: column; width: 100%; margin-top: 1rem; }
+      .nav-links.show { display: flex; }
+      .process-grid::before { display: none; }
+      .pricing-card { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+  <div class="particle" style="left:10%;animation-delay:0s"></div>
+  <div class="particle" style="left:25%;animation-delay:3s;background:#06b6d4"></div>
+  <div class="particle" style="left:50%;animation-delay:7s;background:#ec4899"></div>
+  <div class="particle" style="left:75%;animation-delay:11s"></div>
+  <div class="particle" style="left:90%;animation-delay:5s;background:#06b6d4"></div>
+
+  <header class="header">
+    <nav class="nav">
+      <a href="https://growthmaxagency.com" class="logo">GrowthMax Agency</a>
+      <div class="menu-toggle" onclick="this.nextElementSibling.classList.toggle('show')">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links">
+        <a href="https://growthmaxagency.com#services">Services</a>
+        <a href="https://growthmaxagency.com#contact">Contact</a>
+        <a href="#pricing" class="nav-cta-link">Get Audit →</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge">✦ Social Media Audit ✦</div>
+      <h1>Know exactly why<br>you're not going viral.</h1>
+      <p class="hero-sub">A ruthlessly honest, data-driven audit of your entire social presence.</p>
+      <p class="hero-sub-pink">We don't just audit — we hand you the exact roadmap to grow.</p>
+      <div class="hero-buttons">
+        <a href="#pricing" class="cta-button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Choose Your Plan
+        </a>
+        <a href="https://wa.me/918302354951" class="cta-outline" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.085"/></svg>
+          Talk to us first
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section" id="features">
+    <h2 class="section-title">Every audit covers 6 critical areas</h2>
+    <p class="section-sub">No fluff. No generic advice. Pure data-driven strategy tailored to your brand.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <div class="feature-title">Profile Optimization</div>
+        <div class="feature-desc">Bio, branding, consistency, link strategy — everything a visitor judges in the first 3 seconds.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02</div>
+        <div class="feature-title">Content Analysis</div>
+        <div class="feature-desc">What's working, what's killing your reach, and what your audience actually wants to see.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <div class="feature-title">Competitor Benchmarking</div>
+        <div class="feature-desc">How you stack against your top 3 competitors — and the exact moves to outrank them.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">04</div>
+        <div class="feature-title">Engagement Strategy</div>
+        <div class="feature-desc">Why your followers aren't engaging and the precise tactics to turn scrollers into fans.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">05</div>
+        <div class="feature-title">Hashtag & Timing</div>
+        <div class="feature-desc">Optimal hashtag clusters and posting schedule tailored specifically to your niche and audience.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">06</div>
+        <div class="feature-title">Growth Roadmap</div>
+        <div class="feature-desc">10 actionable steps you can implement this week to start seeing measurable results.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="process-inner">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">Simple, fast, and zero meetings needed — everything happens over chat.</p>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-circle">1</div>
+          <div class="step-title">Pay & Share</div>
+          <div class="step-desc">Complete payment and share your social handles via WhatsApp. No calls needed.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-circle">2</div>
+          <div class="step-title">Deep Dive</div>
+          <div class="step-desc">We analyse every aspect of your presence against real industry benchmarks.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-circle">3</div>
+          <div class="step-title">Report Delivery</div>
+          <div class="step-desc">You receive a premium PDF report within 24 hours — or 6 hours for Luxurious.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-circle">4</div>
+          <div class="step-title">Start Growing</div>
+          <div class="step-desc">Implement our recommendations and watch your metrics transform.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-inner">
+      <h2 class="section-title">Choose your level of transformation</h2>
+      <p class="section-sub">Pay once, grow forever. 100% via chat — money reflects in our account instantly.</p>
+      <div class="pricing-grid">
+
+        <!-- BASIC -->
+        <div class="pricing-card">
+          <div class="plan-label">Basic</div>
+          <div class="plan-price"><sup>₹</sup>999</div>
+          <div class="plan-desc">Perfect for individuals and small businesses ready to understand their social presence.</div>
+          <ul class="plan-features">
+            <li>Profile audit & recommendations</li>
+            <li>Content performance review</li>
+            <li>Top 5 growth tips</li>
+            <li>Hashtag strategy</li>
+            <li>Premium PDF report</li>
+            <li>Delivery within 24 hours</li>
+          </ul>
+          <a href="upi://pay?pa=8302354951@ybl&pn=GrowthMaxAgency&am=999&cu=INR&tn=Basic+Audit" class="pay-btn pay-btn-outline">
+            Pay ₹999 via UPI
+          </a>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="pricing-card featured">
+          <div class="popular-tag">Most Popular</div>
+          <div class="plan-label">Premium</div>
+          <div class="plan-price"><sup>₹</sup>2,500</div>
+          <div class="plan-desc">For brands serious about growth. Deep-dive analysis with a full action plan.</div>
+          <ul class="plan-features">
+            <li>Everything in Basic</li>
+            <li>3 competitor analysis</li>
+            <li>Engagement strategy</li>
+            <li>Content calendar template</li>
+            <li>Platform-specific tactics</li>
+            <li>30-day action plan</li>
+            <li>1 follow-up Q&A via WhatsApp</li>
+          </ul>
+          <a href="upi://pay?pa=8302354951@ybl&pn=GrowthMaxAgency&am=2500&cu=INR&tn=Premium+Audit" class="pay-btn pay-btn-primary">
+            Pay ₹2,500 via UPI
+          </a>
+        </div>
+
+        <!-- LUXURIOUS -->
+        <div class="pricing-card luxury">
+          <div class="luxury-tag">✦ Elite</div>
+          <div class="plan-label">Luxurious</div>
+          <div class="plan-price"><sup>₹</sup>66,666</div>
+          <div class="plan-desc">The ultimate white-glove transformation for elite brands demanding the best.</div>
+          <ul class="plan-features">
+            <li>Everything in Premium</li>
+            <li>Full brand identity review</li>
+            <li>Custom 3-month content strategy</li>
+            <li>Influencer outreach list</li>
+            <li>Ad campaign blueprint</li>
+            <li>Viral content formula</li>
+            <li>Priority delivery in 6 hours</li>
+            <li>Dedicated WhatsApp support (30 days)</li>
+            <li>Weekly strategy review for 1 month</li>
+          </ul>
+          <a href="https://wa.me/918302354951?text=I'm%20interested%20in%20the%20Luxurious%20Audit%20%E2%9C%A6%20%E2%82%B966%2C666" class="pay-btn pay-btn-luxury" target="_blank">
+            Enquire — ₹66,666
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to go viral?</h2>
+    <p>Message us on WhatsApp. We respond within minutes.<br>No calls. No meetings. Just results.</p>
+    <a href="https://wa.me/918302354951?text=Hi!%20I'd%20like%20a%20Social%20Media%20Audit%20from%20GrowthMax%20Agency." class="whatsapp-btn" target="_blank">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.085"/></svg>
+      Chat on WhatsApp
+    </a>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 <a href="https://growthmaxagency.com">GrowthMax Agency</a> | All rights reserved</p>
+    <p>UPI: 8302354951@ybl &nbsp;|&nbsp; Delivering 10X Growth Since 2025</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
